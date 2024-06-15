@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registration Page</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/fontawesome-free/css/all.min.css' %}"
+    />
+    <!-- icheck bootstrap -->
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}"
+    />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}" />
+  </head>
+  <body class="hold-transition register-page">
+    <div class="register-box">
+      <div class="register-logo">
+        <p><b>User Registration</b></p>
+      </div>
+
+      <div class="card">
+        <div class="card-body register-card-body">
+
+          <form id="registerForm" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="First Name"
+                id="first_name"
+                name="first_name"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Last Name"
+                id="last_name"
+                name="last_name"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="email_id"
+                name="email_id"
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                id="username"
+                name="username"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                id="passwd"
+                name="passwd"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Retype password"
+                id="conf_passwd"
+                name="conf_passwd"
+              />
+            </div>
+            <div class="row">
+              <!-- /.col -->
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Register
+                </button>
+              </div>
+              <!-- /.col -->
+            </div>
+            <a href="{% url 'login' %}" class="text-center"
+              >I am already registered</a
+            >
+          </form>
+        </div>
+        <!-- /.form-box -->
+        <div>
+          {% for message in messages %}
+          <h4>{{message}}</h4>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- jquery-validation -->
+    <script src="{% static 'plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/additional-methods.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+    <script>
+      $(function () {
+        $("#registerForm").validate({
+          rules: {
+            first_name: {
+              required: true,
+            },
+            last_name: {
+              required: true,
+            },
+            email_id: {
+              required: true,
+              email: true,
+            },
+            username: {
+              required: true,
+              minlength: 3,
+            },
+            passwd: {
+              required: true,
+              minlength: 5,
+            },
+            conf_passwd: {
+              required: true,
+              minlength: 5,
+            },
+            role: {
+              required: true,
+            },
+          },
+          messages: {
+            first_name: {
+              required: "Please enter First Name",
+            },
+            last_name: {
+              required: "Please enter Last Name",
+            },
+            username: {
+              required: "Please enter a Username",
+            },
+            email_id: {
+              required: "Please enter a email address",
+              email: "Please enter a valid email address",
+            },
+            passwd: {
+              required: "Please provide a password",
+              minlength: "Your password must be at least 5 characters long",
+            },
+            conf_passwd: {
+              required: "Please provide a confirm password",
+              minlength: "Your password must be at least 5 characters long",
+            },
+            role: {
+              required: "Please provide a Role",
+            },
+          },
+          errorElement: "span",
+          errorPlacement: function (error, element) {
+            error.addClass("invalid-feedback");
+            element.closest(".form-group").append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid");
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass("is-invalid");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

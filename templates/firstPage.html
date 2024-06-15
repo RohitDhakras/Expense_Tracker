@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post Page</title>
+  </head>
+  <body>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <h1>Welcome to Expense Tracker Application</h1>
+            <br/><br/>
+            <div className="col-sm-12">
+                <a href="{% url 'register' %}">
+                <button type="button" class="btn btn-gradient-block btn-info btn-lg">Register</button>
+                </a>
+            </div>
+            <br/>
+            <div className="col-sm-12">
+                <a href="{% url 'login' %}">
+                <button type="button" class="btn btn-gradient-block btn-info btn-lg">Login</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
